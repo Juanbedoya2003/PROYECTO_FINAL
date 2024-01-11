@@ -18,6 +18,9 @@ public class Asistencia {
     private LocalTime horaSalida;
     private String observacion;
     private String estado;
+    
+    Asistencia (){
+    }
 
     public Asistencia(LocalDate fecha, LocalTime horaEntrada, LocalTime horaSalida, String observacion, String estado) {
         this.fecha = fecha;
