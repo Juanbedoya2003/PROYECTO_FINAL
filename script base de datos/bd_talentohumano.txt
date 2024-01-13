@@ -1,0 +1,353 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema bd_talentohumano
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema bd_talentohumano
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `bd_talentohumano` DEFAULT CHARACTER SET utf8 ;
+USE `bd_talentohumano` ;
+
+-- -----------------------------------------------------
+-- Table `bd_talentohumano`.`docente`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_talentohumano`.`docente` (
+  `idDocente` INT NOT NULL AUTO_INCREMENT,
+  `docCedulaPasaporte` VARCHAR(45) NOT NULL,
+  `docNacionalida` VARCHAR(45) NOT NULL,
+  `docApellidos` VARCHAR(45) NOT NULL,
+  `docNombres` VARCHAR(45) NOT NULL,
+  `docFechaNacimiento` DATE NOT NULL,
+  `docTipoSangre` VARCHAR(45) NOT NULL,
+  `docGenero` VARCHAR(45) NOT NULL,
+  `docCorreo` VARCHAR(45) NOT NULL,
+  `docEstadoCivil` VARCHAR(45) NOT NULL,
+  `docTelefonoDomicilio` VARCHAR(45) NOT NULL,
+  `docTelefonoCelular` VARCHAR(45) NOT NULL,
+  `docFechaDeclaracionBienes` DATE NOT NULL,
+  `docFechaAntecedentesServPubl` DATE NOT NULL,
+  `docProvincia` VARCHAR(45) NOT NULL,
+  `docCanton` VARCHAR(45) NOT NULL,
+  `docParroquia` VARCHAR(45) NOT NULL,
+  `docCallePrincipal` VARCHAR(45) NOT NULL,
+  `docCalleSecundaria` VARCHAR(45) NOT NULL,
+  `docCallePrincipalNumero` VARCHAR(45) NOT NULL,
+  `docCalleSecundariaNumero` VARCHAR(45) NOT NULL,
+  `docEtnia` VARCHAR(45) NOT NULL,
+  `docEstado` VARCHAR(45) NOT NULL,
+  `docUser` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idDocente`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bd_talentohumano`.`hijo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_talentohumano`.`hijo` (
+  `idHijo` INT NOT NULL AUTO_INCREMENT,
+  `hijoCedula` VARCHAR(45) NOT NULL,
+  `hijoApellidos` VARCHAR(45) NOT NULL,
+  `hijoNombre` VARCHAR(45) NOT NULL,
+  `hijoFechaNacimiento` VARCHAR(45) NOT NULL,
+  `hijoEscolaridad` VARCHAR(45) NOT NULL,
+  `Docente_idDocente` INT NOT NULL,
+  PRIMARY KEY (`idHijo`, `Docente_idDocente`),
+  INDEX `fk_Hijo_Docente1_idx` (`Docente_idDocente` ASC) VISIBLE,
+  CONSTRAINT `fk_Hijo_Docente1`
+    FOREIGN KEY (`Docente_idDocente`)
+    REFERENCES `bd_talentohumano`.`docente` (`idDocente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bd_talentohumano`.`discapacidad`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_talentohumano`.`discapacidad` (
+  `idDiscapacidad` INT NOT NULL AUTO_INCREMENT,
+  `discSituacionDisc` VARCHAR(45) NOT NULL,
+  `discTipoRelacionDisc` VARCHAR(45) NOT NULL,
+  `discNumeroConadis` VARCHAR(45) NOT NULL,
+  `discCertificadoDiscSiNo` TINYINT NOT NULL,
+  `discTipoDisc` VARCHAR(45) NOT NULL,
+  `discPorcentajeDisc` DECIMAL NOT NULL,
+  `discTipoEnfermedad` VARCHAR(45) NOT NULL,
+  `Docente_idDocente` INT NOT NULL,
+  PRIMARY KEY (`idDiscapacidad`, `Docente_idDocente`),
+  INDEX `fk_Discapacidad_Docente1_idx` (`Docente_idDocente` ASC) VISIBLE,
+  CONSTRAINT `fk_Discapacidad_Docente1`
+    FOREIGN KEY (`Docente_idDocente`)
+    REFERENCES `bd_talentohumano`.`docente` (`idDocente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bd_talentohumano`.`contactoEmergencia`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_talentohumano`.`contactoEmergencia` (
+  `idContactoEmergencia` INT NOT NULL AUTO_INCREMENT,
+  `emeApellidos` VARCHAR(45) NOT NULL,
+  `emerNombres` VARCHAR(45) NOT NULL,
+  `emerTelefonoDomicilio` VARCHAR(45) NOT NULL,
+  `emerTelefonoCelular` VARCHAR(45) NOT NULL,
+  `Docente_idDocente` INT NOT NULL,
+  PRIMARY KEY (`idContactoEmergencia`, `Docente_idDocente`),
+  INDEX `fk_ContactoEmergencia_Docente1_idx` (`Docente_idDocente` ASC) VISIBLE,
+  CONSTRAINT `fk_ContactoEmergencia_Docente1`
+    FOREIGN KEY (`Docente_idDocente`)
+    REFERENCES `bd_talentohumano`.`docente` (`idDocente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bd_talentohumano`.`evaluacion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_talentohumano`.`evaluacion` (
+  `idEvaluacion` INT NOT NULL AUTO_INCREMENT,
+  `evaPeriodeDesde` DATE NOT NULL,
+  `evaPeriodoHasta` DATE NOT NULL,
+  `evaNombreInstitucion` VARCHAR(45) NOT NULL,
+  `evaPuntaje` VARCHAR(45) NOT NULL,
+  `evaCalificacion` VARCHAR(45) NOT NULL,
+  `evaObservacion` VARCHAR(45) NOT NULL,
+  `Docente_idDocente` INT NOT NULL,
+  PRIMARY KEY (`idEvaluacion`, `Docente_idDocente`),
+  INDEX `fk_Evaluacion_Docente1_idx` (`Docente_idDocente` ASC) VISIBLE,
+  CONSTRAINT `fk_Evaluacion_Docente1`
+    FOREIGN KEY (`Docente_idDocente`)
+    REFERENCES `bd_talentohumano`.`docente` (`idDocente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bd_talentohumano`.`inclusionLaboral`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_talentohumano`.`inclusionLaboral` (
+  `idInclusionLaboral` INT NOT NULL AUTO_INCREMENT,
+  `inclMigrante` VARCHAR(45) NOT NULL,
+  `inclNacionalidad` VARCHAR(45) NOT NULL,
+  `inclEmbarazo` VARCHAR(45) NOT NULL,
+  `inclMesesEmbarazo` INT NOT NULL,
+  `inclLicencia` VARCHAR(45) NOT NULL,
+  `inclPorcentaje` DECIMAL NOT NULL,
+  `Docente_idDocente` INT NOT NULL,
+  PRIMARY KEY (`idInclusionLaboral`, `Docente_idDocente`),
+  INDEX `fk_InclusionLaboral_Docente1_idx` (`Docente_idDocente` ASC) VISIBLE,
+  CONSTRAINT `fk_InclusionLaboral_Docente1`
+    FOREIGN KEY (`Docente_idDocente`)
+    REFERENCES `bd_talentohumano`.`docente` (`idDocente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bd_talentohumano`.`formacionAcademica`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_talentohumano`.`formacionAcademica` (
+  `idFormacionAcademica` INT NOT NULL AUTO_INCREMENT,
+  `formInstitucionEducativa` VARCHAR(45) NOT NULL,
+  `formNivelInstruccion` VARCHAR(45) NOT NULL,
+  `formNumeroCertificadoSenecyt` VARCHAR(45) NOT NULL,
+  `formNumeroAniosAprobados` INT NOT NULL,
+  `formAreaConocimiento` VARCHAR(45) NOT NULL,
+  `formEgresadoGraduado` VARCHAR(45) NOT NULL,
+  `formTituloObtenido` VARCHAR(45) NOT NULL,
+  `formPaisTituloObtenido` VARCHAR(45) NOT NULL,
+  `Docente_idDocente` INT NOT NULL,
+  PRIMARY KEY (`idFormacionAcademica`, `Docente_idDocente`),
+  INDEX `fk_FormacionAcademica_Docente1_idx` (`Docente_idDocente` ASC) VISIBLE,
+  CONSTRAINT `fk_FormacionAcademica_Docente1`
+    FOREIGN KEY (`Docente_idDocente`)
+    REFERENCES `bd_talentohumano`.`docente` (`idDocente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bd_talentohumano`.`experienciaLaboral`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_talentohumano`.`experienciaLaboral` (
+  `idExperienciaLaboral` INT NOT NULL AUTO_INCREMENT,
+  `expInstitucionPubliPriv` VARCHAR(45) NOT NULL,
+  `expInstitucionNombre` VARCHAR(45) NOT NULL,
+  `expDepartamentoArea` VARCHAR(45) NOT NULL,
+  `expPuestoDenominacion` VARCHAR(45) NOT NULL,
+  `expFechaIngreso` DATE NOT NULL,
+  `expFechaSalida` DATE NOT NULL,
+  `expModalidad` VARCHAR(45) NOT NULL,
+  `expMotivoSalida` VARCHAR(45) NOT NULL,
+  `Docente_idDocente` INT NOT NULL,
+  PRIMARY KEY (`idExperienciaLaboral`, `Docente_idDocente`),
+  INDEX `fk_ExperienciaLaboral_Docente1_idx` (`Docente_idDocente` ASC) VISIBLE,
+  CONSTRAINT `fk_ExperienciaLaboral_Docente1`
+    FOREIGN KEY (`Docente_idDocente`)
+    REFERENCES `bd_talentohumano`.`docente` (`idDocente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bd_talentohumano`.`asistencia`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_talentohumano`.`asistencia` (
+  `idAsistencia` INT NOT NULL AUTO_INCREMENT,
+  `asisFecha` DATE NOT NULL,
+  `asisHoraEntrada` TIME NOT NULL,
+  `asisHoraSalida` TIME NOT NULL,
+  `asisObservacion` VARCHAR(45) NOT NULL,
+  `Docente_idDocente` INT NOT NULL,
+  `asisEstado` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idAsistencia`, `Docente_idDocente`),
+  INDEX `fk_Asistencia_Docente_idx` (`Docente_idDocente` ASC) VISIBLE,
+  CONSTRAINT `fk_Asistencia_Docente`
+    FOREIGN KEY (`Docente_idDocente`)
+    REFERENCES `bd_talentohumano`.`docente` (`idDocente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bd_talentohumano`.`hojaRuta`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_talentohumano`.`hojaRuta` (
+  `idHojaRuta` INT NOT NULL AUTO_INCREMENT,
+  `hojaFechaHoraInicio` DATETIME NOT NULL,
+  `hojaFechaHoraFin` DATETIME NOT NULL,
+  `hojaObservacion` VARCHAR(45) NOT NULL,
+  `hojaEstado` VARCHAR(45) NOT NULL,
+  `Docente_idDocente` INT NOT NULL,
+  PRIMARY KEY (`idHojaRuta`, `Docente_idDocente`),
+  INDEX `fk_HojaRuta_Docente1_idx` (`Docente_idDocente` ASC) VISIBLE,
+  CONSTRAINT `fk_HojaRuta_Docente1`
+    FOREIGN KEY (`Docente_idDocente`)
+    REFERENCES `bd_talentohumano`.`docente` (`idDocente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bd_talentohumano`.`permiso`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_talentohumano`.`permiso` (
+  `idPermiso` INT NOT NULL AUTO_INCREMENT,
+  `permMotivo` VARCHAR(45) NOT NULL,
+  `permFechaHoraInicializacion` DATETIME NOT NULL,
+  `permFechaHoraFinalizacion` DATETIME NOT NULL,
+  `permObservacion` VARCHAR(45) NOT NULL,
+  `permEstado` VARCHAR(45) NOT NULL,
+  `Docente_idDocente` INT NOT NULL,
+  PRIMARY KEY (`idPermiso`, `Docente_idDocente`),
+  INDEX `fk_Permiso_Docente1_idx` (`Docente_idDocente` ASC) VISIBLE,
+  CONSTRAINT `fk_Permiso_Docente1`
+    FOREIGN KEY (`Docente_idDocente`)
+    REFERENCES `bd_talentohumano`.`docente` (`idDocente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bd_talentohumano`.`vacaciones`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_talentohumano`.`vacaciones` (
+  `idVacaciones` INT NOT NULL AUTO_INCREMENT,
+  `vacFechaHoraInicializacion` DATETIME NOT NULL,
+  `vacFechaHoraFinalizacion` DATETIME NOT NULL,
+  `vacObservacion` VARCHAR(45) NOT NULL,
+  `vacEstado` VARCHAR(45) NOT NULL,
+  `Docente_idDocente` INT NOT NULL,
+  PRIMARY KEY (`idVacaciones`, `Docente_idDocente`),
+  INDEX `fk_Vacaciones_Docente1_idx` (`Docente_idDocente` ASC) VISIBLE,
+  CONSTRAINT `fk_Vacaciones_Docente1`
+    FOREIGN KEY (`Docente_idDocente`)
+    REFERENCES `bd_talentohumano`.`docente` (`idDocente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bd_talentohumano`.`conyuge`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_talentohumano`.`conyuge` (
+  `idConyuge` INT NOT NULL AUTO_INCREMENT,
+  `conCedula` VARCHAR(45) NOT NULL,
+  `conApellidos` VARCHAR(45) NOT NULL,
+  `conNombres` VARCHAR(45) NOT NULL,
+  `conTipoRelacion` VARCHAR(45) NOT NULL,
+  `Docente_idDocente` INT NOT NULL,
+  PRIMARY KEY (`idConyuge`, `Docente_idDocente`),
+  INDEX `fk_Conyuge_Docente1_idx` (`Docente_idDocente` ASC) VISIBLE,
+  CONSTRAINT `fk_Conyuge_Docente1`
+    FOREIGN KEY (`Docente_idDocente`)
+    REFERENCES `bd_talentohumano`.`docente` (`idDocente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bd_talentohumano`.`cuentaBancaria`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_talentohumano`.`cuentaBancaria` (
+  `idCuentaBancaria` INT NOT NULL AUTO_INCREMENT,
+  `cuenInstitucionFinanciera` VARCHAR(45) NOT NULL,
+  `cuenTipoCuenta` VARCHAR(45) NOT NULL,
+  `cuenNumeroCuenta` VARCHAR(45) NOT NULL,
+  `Docente_idDocente` INT NOT NULL,
+  PRIMARY KEY (`idCuentaBancaria`, `Docente_idDocente`),
+  INDEX `fk_CuentaBancaria_Docente1_idx` (`Docente_idDocente` ASC) VISIBLE,
+  CONSTRAINT `fk_CuentaBancaria_Docente1`
+    FOREIGN KEY (`Docente_idDocente`)
+    REFERENCES `bd_talentohumano`.`docente` (`idDocente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bd_talentohumano`.`capacitaciones`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_talentohumano`.`capacitaciones` (
+  `idCapacitaciones` INT NOT NULL AUTO_INCREMENT,
+  `capNombre` VARCHAR(45) NOT NULL,
+  `capTipo` VARCHAR(45) NOT NULL,
+  `capAuspiciante` VARCHAR(45) NOT NULL,
+  `capDuracionHoras` INT NOT NULL,
+  `capAprobadoDesaprobado` TINYINT NOT NULL,
+  `capPais` VARCHAR(45) NOT NULL,
+  `capInstQueAprueba` VARCHAR(45) NOT NULL,
+  `capFechaHoraInicio` DATETIME NOT NULL,
+  `capFechaHoraFin` DATETIME NOT NULL,
+  `Docente_idDocente` INT NOT NULL,
+  PRIMARY KEY (`idCapacitaciones`, `Docente_idDocente`),
+  INDEX `fk_Capacitaciones_Docente1_idx` (`Docente_idDocente` ASC) VISIBLE,
+  CONSTRAINT `fk_Capacitaciones_Docente1`
+    FOREIGN KEY (`Docente_idDocente`)
+    REFERENCES `bd_talentohumano`.`docente` (`idDocente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
