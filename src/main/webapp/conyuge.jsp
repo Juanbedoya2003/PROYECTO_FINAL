@@ -3,12 +3,6 @@
     Created on : 03/01/2024, 18:16:15
     Author     : Juan Bedoya
 --%>
-<%-- 
-    Document   : hijos
-    Created on : 03/01/2024, 18:04:18
-    Author     : Juan Bedoya
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,94 +13,68 @@
         <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
         <title>CONYUGE</title>
     </head>
-    <body>
-        <div class="ml-4 mt-4 mr-4">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <form action="Controlador?menu=conyuge" method="POST">
+    <body  class="d-flex align-items-center justify-content-center" style="height: 70vh; background-color: #f8f9fa;"> 
+        <div class="container mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <form action="ControladorConyuge" method="POST">
+                        <div class="row">
+                            <!-- Columna 1 -->
+                            <div class="col-sm-6">
 
+                                <!-- Fila 1 -->
                                 <div class="form-group">
-                                    <label>Cedula</label>
-                                    <input type="text" value="${empleado.getNom()}" name="txtNombres" class="form-control">
+                                    <label>Id del Conyuge:</label>
+                                    <input type="number" name="idUpdate" class="form-control">
                                 </div>
+                                <!-- Fila 2 -->
+                                <div class="form-group">
+                                    <label>Cedula del conyuge o conviviente</label>
+                                    <input type="number" name="intCedula" class="form-control">
+                                </div>
+                                <!-- Fila 3 -->
                                 <div class="form-group">
                                     <label>Apellidos</label>
-                                    <input type="text" value="${empleado.getTel()}" name="txtTel" class="form-control">
+                                    <input type="text" name="txtApellidos" class="form-control">
                                 </div>
+                            </div>
+                            <!-- Columna 2 -->
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Cedula del docente:</label>
+                                    <input type="number" name="intFkdocente" class="form-control">
+                                </div>
+                                <!-- Fila 1 -->
                                 <div class="form-group">
                                     <label>Nombres</label>
-                                    <input type="text" value="${empleado.getTel()}" name="txtTel" class="form-control">
+                                    <input type="text" name="txtNombres" class="form-control">
                                 </div>
+                                <!-- Fila 2 -->
                                 <div class="form-group">
-                                    <label>Tipo Relacion</label>
-                                    <input type="text" value="${empleado.getUser()}" name="txtUser" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Estado</label>
-                                    <select class="form-control" name="txtEstado">
-                                        <option value="1">ACTIVO</option>
-                                        <option value="0">INACTIVO</option>
+                                    <label>Tipo de relacion</label>
+                                    <select class="form-control" name="txtTiporelacion">
+                                        <option value="Conviviente">Conviviente</option>
+                                        <option value="Conyuge">Conyuge</option>
                                     </select>
                                 </div>
-
-                                <input type="submit" name="accion" value="Agregar" class="btn btn-primary">
-                                <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
-                            </form>
-                        </div>                         
-                    </div>
-                </div>                     
-                <div class="col-sm-8">
-                    <div class="card">
-                        <div class="card-body">
-                            <table class="table table-hover" style="width: 100%" id="example">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>                                
-                                        <th>CEDULA</th>
-                                        <th>APELLIDOS</th>
-                                        <th>NOMBRES</th>
-                                        <th>RELACION</th>
-                                        <th>ESTADO</th>
-                                        <th>ACCION</th>
-                                    </tr>
-                                </thead>
-                                <tbody> 
-                                <c:forEach var="em" items="${empleados}" varStatus="n">
-                                    <tr>
-                                        <td>${n.index+1}</td>                                    
-                                        <td>${em.getNom()}</td>
-                                        <td>${em.getDni()}</td>
-                                        <td>${em.getTel()}</td>
-                                    <c:if test="${em.getEstado()=='1'}">
-                                        <td>ACTIVO</td>
-                                    </c:if>
-                                    <c:if test="${em.getEstado()=='0'}">
-                                        <td>INACTIVO</td>
-                                    </c:if>                                    
-                                    <td>${em.getUser()}</td>
-                                    <td class="text-center">
-                                        <div class="btn-group">
-                                            <a class="btn btn-outline-warning btn-sm mr-2" href="Controlador?menu=Producto&accion=Editar&id=${em.getId()}"><i class="icon ion-md-create"></i></a>
-                                            <a class="btn btn-outline-danger btn-sm" href="Controlador?menu=Producto&accion=Delete&id=${em.getId()}"><i class="icon ion-md-trash"></i></a>
-                                        </div>
-                                    </td>
-                                    </tr>
-                                </c:forEach>
-
-                                </tbody>
-                            </table>
+                                <!-- Fila 3 -->
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <input type="submit" name="conyuge" value="Agregar" class="btn btn-primary">
+                                        <input type="submit" name="conyuge" value="Actualizar" class="btn btn-success">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                        <% if (request.getAttribute("cajitamensajebase") != null) {
+                           out.println(request.getAttribute("cajitamensajebase"));
+                       } %>
+                    </form>
                 </div>
-            </div>      
-        </div>      
+            </div>
+        </div>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-
     </body>
 </html>
-

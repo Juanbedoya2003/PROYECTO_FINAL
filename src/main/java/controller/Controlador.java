@@ -5,15 +5,23 @@
  */
 package controller;
 
-import Modelo.Asistencia;
-import Modelo.Docente;
-import Modelo.DocenteDAO;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import modeloDTO.Docente;
+import modeloDAO.DocenteDAO;
 
 /**
  *
@@ -21,86 +29,26 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class Controlador extends HttpServlet {
 
-    Docente doc = new Docente();
-    DocenteDAO dodao = new DocenteDAO();
-   
+    DocenteDAO test;
+    String mensaje = "Error de conexion"; //variable para enviar mensaje hacia la vista
+
+    // metodo para dar orden de abrir la conexion
+    public void init() throws ServletException {
+        String jdbcURL = getServletContext().getInitParameter("jdbcURL"); //extraigo el dato
+        String jdbcUSERName = getServletContext().getInitParameter("jdbcUSERName"); //extraigo el dato
+        String jdbcPassword = getServletContext().getInitParameter("jdbcPassword"); //extraigo el dato
+
+        try {
+            test = new DocenteDAO(jdbcURL, jdbcUSERName, jdbcPassword);
+            mensaje = "Conexion establecida";
+        } catch (SQLException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);;
+            mensaje = "Error de conexion";
+        }
+    }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-             String menu = request.getParameter("menu");
-        String accion = request.getParameter("accion");
-
-        if (menu.equals("Principal")) {
-            request.getRequestDispatcher("Principal.jsp").forward(request, response);
-        }
-        if (menu.equals("Docente")) {
-            request.getRequestDispatcher("Docente.jsp").forward(request, response);
-        }
-        if (menu.equals("Asistencia")) {
-            request.getRequestDispatcher("Asistencia.jsp").forward(request, response);
-        }
-        if (menu.equals("Permisos")) {
-            request.getRequestDispatcher("Permisos.jsp").forward(request, response);
-        }
-        if (menu.equals("Vacaciones")) {
-            request.getRequestDispatcher("Vacaciones.jsp").forward(request, response);
-        }
-        if (menu.equals("Discapacidad")) {
-            request.getRequestDispatcher("Discapacidad.jsp").forward(request, response);
-        }
-        if (menu.equals("Evaluacion")) {
-            request.getRequestDispatcher("Evaluacion.jsp").forward(request, response);
-        }
-        if (menu.equals("contactoEmergencia")) {
-            request.getRequestDispatcher("contactoEmergencia.jsp").forward(request, response);
-        }
-        if (menu.equals("Capacitaciones")) {
-            request.getRequestDispatcher("Capacitaciones.jsp").forward(request, response);
-        }
-        if (menu.equals("FormacionAcademica")) {
-            request.getRequestDispatcher("FormacionAcademica.jsp").forward(request, response);
-        }
-        if (menu.equals("InclusionLaboral")) {
-            request.getRequestDispatcher("InclusionLaboral.jsp").forward(request, response);
-        }
-        if (menu.equals("experienciaLaboral")) {
-            request.getRequestDispatcher("experienciaLaboral.jsp").forward(request, response);
-        }
-        if (menu.equals("HojaRuta")) {
-            request.getRequestDispatcher("HojaRuta.jsp").forward(request, response);
-        }
-        if (menu.equals("CuentaBancaria")) {
-            request.getRequestDispatcher("CuentaBancaria.jsp").forward(request, response);
-        }
-        if (menu.equals("conyuge")) {
-            request.getRequestDispatcher("conyuge.jsp").forward(request, response);
-        }
-        if (menu.equals("hijos")) {
-            request.getRequestDispatcher("hijos.jsp").forward(request, response);
-        }
-        if (menu.equals("RegistrarAsistencia")) {
-            request.getRequestDispatcher("RegistrarAsistencia.jsp").forward(request, response);
-        }
-        if (menu.equals("RegistrarPermiso")) {
-            request.getRequestDispatcher("RegistrarPermiso.jsp").forward(request, response);
-        }
-        if (menu.equals("RegistrarVacaciones")) {
-            request.getRequestDispatcher("RegistrarVacaciones.jsp").forward(request, response);
-        }
-
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Controlador</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Controlador at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -129,17 +77,93 @@ public class Controlador extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+        // processRequest(request, response);
+        //DOCENTES:
+        String nacionalidad, apellidos, nombres, fechanacimiento, tiposangre, genero, correo, estadocivil, telefonodomicilio, telefonocelular,
+                fechadeclaraciones, fechaantecedentes, provincia, canton, parroquia, calleprincipal, callesecundaria, numcalleprincipal, numcallesecundaria, etnia, estado, user;
+        int cedula, intCedula;
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+        String doc;//estas variables se usaran para recibir los datos 
+
+        cedula = Integer.parseInt(request.getParameter("intCedula"));//con esta linea de codigo podemos recibir cualquier dato que venga de la vista
+        nacionalidad = request.getParameter("txtNacionalidad"); //con esta linea de codigo podemos recibir cualquier dato que venga de la vista
+        apellidos = request.getParameter("txtApellidos");
+        nombres = request.getParameter("txtNombres");
+        fechanacimiento = request.getParameter("dateFechaNacimiento");
+        tiposangre = request.getParameter("txtTipoSangre");
+        genero = request.getParameter("txtGenero");
+        correo = request.getParameter("txtCorreo");
+        estadocivil = request.getParameter("txtEstadoCivil");
+        telefonodomicilio = request.getParameter("nbTelefonoDomicilio");
+        telefonocelular = request.getParameter("nbTelefonoCelular");
+        fechadeclaraciones = request.getParameter("dtDeclaraciones");
+        fechaantecedentes = request.getParameter("dtAntecedentes");
+        provincia = request.getParameter("txtProvincia");
+        canton = request.getParameter("txtCanton");
+        parroquia = request.getParameter("txtParroquia");
+        calleprincipal = request.getParameter("txtCallePrincipal");
+        callesecundaria = request.getParameter("txtCalleSecundaria");
+        numcalleprincipal = request.getParameter("txtNumCallePrincipal");
+        numcallesecundaria = request.getParameter("txtNumCalleSecundaria");
+        etnia = request.getParameter("txtEtnia");
+        estado = request.getParameter("txtEstado");
+        user = request.getParameter("txtUser");
+
+        // Verificación de existencia de cedulaDocente en la solicitud
+        String cedulaDocenteParam = request.getParameter("intCedula");
+        if (cedulaDocenteParam != null && !cedulaDocenteParam.isEmpty()) {
+          intCedula = Integer.parseInt(cedulaDocenteParam);
+        } else {
+           intCedula = 0; // O asigna el valor que desees para indicar que no se proporcionó un id
+        }
+
+        doc = request.getParameter("docente");
+
+        Docente objdo = new Docente(cedula, nacionalidad, apellidos, nombres, fechanacimiento,
+                tiposangre, genero, correo, estadocivil, telefonodomicilio, telefonocelular,
+                fechadeclaraciones, fechaantecedentes, provincia, canton, parroquia, numcalleprincipal,
+                calleprincipal, numcallesecundaria, callesecundaria, etnia, estado, user);
+
+        if (doc.equalsIgnoreCase("Agregar")) {
+
+            if (test.registrar(objdo)) {
+
+                // dar la orden de insertar
+                mensaje = "Datos insertados correctamente";
+            } else {
+                mensaje = "Error en la inserción de datos";
+            }
+        }
+        if (doc.equalsIgnoreCase("Actualizar")) {
+            Docente objact = new Docente(intCedula, nacionalidad, apellidos, nombres, fechanacimiento,
+                    tiposangre, genero, correo, estadocivil, telefonodomicilio, telefonocelular,
+                    fechadeclaraciones, fechaantecedentes, provincia, canton, parroquia, numcalleprincipal,
+                    calleprincipal, numcallesecundaria, callesecundaria, etnia, estado, user);
+            if (test.EditarTODO(objact)) {
+
+                mensaje = "Registro Actualizado";
+            } else {
+                mensaje = "Error al actualizar el registro";
+
+                // Verificar si el registro no se encuentra
+                if (!test.existeRegistro(objact.getCedula())) {
+                    mensaje = "Registro no encontrado";
+                }
+            }
+        }
+        
+        
+            
+            request.setAttribute("cajitamensajebase", mensaje);
+            RequestDispatcher objretorno = request.getRequestDispatcher("Docente.jsp");
+            objretorno.forward(request, response);
+        }
+
+        @Override
+        public String getServletInfo
+        
+            () {
         return "Short description";
-    }// </editor-fold>
+        }// </editor-fold>
 
-}
+    }

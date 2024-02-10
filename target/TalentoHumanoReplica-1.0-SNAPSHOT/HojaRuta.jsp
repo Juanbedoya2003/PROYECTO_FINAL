@@ -14,82 +14,115 @@
         <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
         <title>HOJA RUTA</title>
     </head>
-    <body>
+    <script type="text/javascript">
+        // Función para obtener un parámetro de la URL
+        function obtenerParametroURL(nombre) {
+            var url = new URL(window.location.href);
+            return url.searchParams.get(nombre);
+        }
+
+        // Función para llenar los campos del formulario con los parámetros de la URL
+        function llenarCamposFormulario() {
+            var idHojaRuta = obtenerParametroURL('id');
+            var fecha = obtenerParametroURL('hojaFecha');
+            var horaInicia = obtenerParametroURL('hojaHoraInicia');
+            var horaFinaliza = obtenerParametroURL('hojaHoraFinaliza');
+            var horaTotal = obtenerParametroURL('hojaHoraTotal');
+            var observacion = obtenerParametroURL('hojaObservacion');
+            var estado = obtenerParametroURL('hojaEstado');
+            var cedula = obtenerParametroURL('docente_cedulaDocente');
+
+
+            document.getElementById('idHojaRuta').value = idHojaRuta;
+            document.getElementById('hojaFecha').value = fecha;
+            document.getElementById('hojaHoraInicia').value = horaInicia;
+            document.getElementById('hojaHoraFinaliza').value = horaFinaliza;
+            document.getElementById('hojaHoraTotal').value = horaTotal;
+            document.getElementById('hojaObservacion').value = observacion;
+            document.getElementById('hojaEstado').value = estado;
+            document.getElementById('docente_cedulaDocente').value = cedula;
+        }
+
+        document.addEventListener('DOMContentLoaded', llenarCamposFormulario);
+    </script>
+
+    <body class="d-flex align-items-center justify-content-center" style="height: 80vh; background-color: #f8f9fa;">
         <div class="d-flex">
             <div class="card col-sm-14">
                 <div class="card-body">
-                    <form action="Controlador?menu=HojaRuta" method="POST">
-                        <div class="form-group">
-                            <label>Fecha Hora de Inicio:</label>
-                            <input type="datetime" name="txtCedula"  class="form-control">
+                    <form action="ControladorHojaRuta" method="POST">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Id Hoja Ruta:</label>
+                                    <input type="number" name="idUpdate" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Cedula del Docente:</label>
+                                    <input type="number" name="intFkdocente" class="form-control">
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Fecha Hora de Fin:</label>
-                            <input type="datetime" name="txtNombres"  class="form-control">
+
+                        <div class="row">
+                            <!-- Segunda fila -->
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Fecha de Ausencia:</label>
+                                    <input type="date" name="tsFechahorainicia" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Hora inicia:</label>
+                                    <input type="time" name="txtHoraInicia" class="form-control">
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Observacion:</label>
-                            <input type="text" name="txtApellidos"  class="form-control">
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Hora Finaliza:</label>
+                                    <input type="time" name="txtHoraFinaliza" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Horas total:</label>
+                                    <input type="text" name="txtHoraTotal"  class="form-control" value="<%= request.getAttribute("horasAusencia") != null ? request.getAttribute("horasAusencia") : "" %>" readonly>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Estado:</label>
-                            <div class="col-sm-14">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Observacion:</label>
+                                <input type="text" name="txtObservacion" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Estado:</label>
                                 <select class="form-control" name="txtEstado">
-                                    <option value="1">ACTIVO</option>
-                                    <option value="0">INACTIVO</option>
+                                    <option value="ACTIVO">ACTIVO</option>
+                                    <option value="INACTIVO">INACTIVO</option>
                                 </select>
                             </div>
                         </div>
-                        <input type="submit" name="accion" value="Agregar" class="btn btn-info">
-                        <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
+
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <input type="submit" name="hojaruta" value="Agregar" class="btn btn-info">
+                                <input type="submit" name="hojaruta" value="Actualizar" class="btn btn-success">
+                            </div>
+                        </div>
+
+                        <% if (request.getAttribute("cajitamensajebase") != null) {
+                            out.println(request.getAttribute("cajitamensajebase"));
+                        } %>
                     </form>
-
                 </div>
-
             </div>
-
-
-            <div class="col-sm-9">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>FECHA HORA INICIO</th>
-                            <th>FECHA HORA FINALIZA</th>
-                            <th>OBSERVACION</th>
-                            <th>ESTADO</th>
-                            <th>ACCIONES</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="doc" items="${docentes}">
-                        <tr>
-                            <td>${doc.getId()}</td>
-                            <td>{doc.getId}</td>
-                            <td>{doc.getId}</td>
-                            <td>{doc.getId}</td>
-                             <c:if test="${em.getEstado()=='1'}">
-                                <td class="text-center">ACTIVO</td>
-                            </c:if>
-                            <c:if test="${em.getEstado()!='1'}">
-                                <td class="text-center">INACTIVO</td>
-                            </c:if>
-                            <td class="text-center">
-                                <div class="btn-group">
-                                    <a class="btn btn-outline-warning btn-sm mr-2" href="Controlador?menu=Producto&accion=Editar&id=${em.getId()}"><i class="icon ion-md-create"></i></a>
-                                    <a class="btn btn-outline-danger btn-sm" href="Controlador?menu=Producto&accion=Delete&id=${em.getId()}"><i class="icon ion-md-trash"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-
-            </div>
-
         </div>
-
-
     </body>
-</html>
-

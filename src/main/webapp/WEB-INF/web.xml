@@ -8,17 +8,275 @@
         <servlet-name>Controlador</servlet-name>
         <servlet-class>controller.Controlador</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>ControladorValidar</servlet-name>
-        <url-pattern>/ControladorValidar</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Controlador</servlet-name>
-        <url-pattern>/Controlador</url-pattern>
-    </servlet-mapping>
-    <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
-    </session-config>
+    <servlet>
+    <servlet-name>ControladorAsistencia</servlet-name>
+    <servlet-class>controller.ControladorAsistencia</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorCapacitaciones</servlet-name>
+    <servlet-class>controller.ControladorCapacitaciones</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorBanco</servlet-name>
+    <servlet-class>controller.ControladorBanco</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorContactoEmergencia</servlet-name>
+    <servlet-class>controller.ControladorContactoEmergencia</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorConyuge</servlet-name>
+    <servlet-class>controller.ControladorConyuge</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorDiscapacidad</servlet-name>
+    <servlet-class>controller.ControladorDiscapacidad</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorEvaluacion</servlet-name>
+    <servlet-class>controller.ControladorEvaluacion</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorExperienciaLaboral</servlet-name>
+    <servlet-class>controller.ControladorExperienciaLaboral</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorFormacionAcademica</servlet-name>
+    <servlet-class>controller.ControladorFormacionAcademica</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorHijo</servlet-name>
+    <servlet-class>controller.ControladorHijo</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorInclusionLaboral</servlet-name>
+    <servlet-class>controller.ControladorInclusionLaboral</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorPermiso</servlet-name>
+    <servlet-class>controller.ControladorPermiso</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorVacacion</servlet-name>
+    <servlet-class>controller.ControladorVacacion</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorHojaRuta</servlet-name>
+    <servlet-class>controller.ControladorHojaRuta</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorReporteDocente</servlet-name>
+    <servlet-class>controller.ControladorReporteDocente</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorReporteBanco</servlet-name>
+    <servlet-class>controller.ControladorReporteBanco</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorReporteCapacitaciones</servlet-name>
+    <servlet-class>controller.ControladorReporteCapacitaciones</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorReporteDiscapacidad</servlet-name>
+    <servlet-class>controller.ControladorReporteDiscapacidad</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorReporteEvaluacion</servlet-name>
+    <servlet-class>controller.ControladorReporteEvaluacion</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorReporteExperienciaLaboral</servlet-name>
+    <servlet-class>controller.ControladorReporteExperienciaLaboral</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorReporteFormacionAcademica</servlet-name>
+    <servlet-class>controller.ControladorReporteFormacionAcademica</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorReporteHijo</servlet-name>
+    <servlet-class>controller.ControladorReporteHijo</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorReporteConyuge</servlet-name>
+    <servlet-class>controller.ControladorReporteConyuge</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorReporteVacacion</servlet-name>
+    <servlet-class>controller.ControladorReporteVacacion</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorReportePermiso</servlet-name>
+    <servlet-class>controller.ControladorReportePermiso</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorReporteInclusionLaboral</servlet-name>
+    <servlet-class>controller.ControladorReporteInclusionLaboral</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorReporteHojaRuta</servlet-name>
+    <servlet-class>controller.ControladorReporteHojaRuta</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorReporteContactoEmergencia</servlet-name>
+    <servlet-class>controller.ControladorReporteContactoEmergencia</servlet-class>
+</servlet>
+<servlet>
+    <servlet-name>ControladorReporteAsistencia</servlet-name>
+    <servlet-class>controller.ControladorReporteAsistencia</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>ControladorValidar</servlet-name>
+    <url-pattern>/ControladorValidar</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>Controlador</servlet-name>
+    <url-pattern>/Controlador</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorAsistencia</servlet-name>
+    <url-pattern>/ControladorAsistencia</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorCapacitaciones</servlet-name>
+    <url-pattern>/ControladorCapacitaciones</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorBanco</servlet-name>
+    <url-pattern>/ControladorBanco</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorContactoEmergencia</servlet-name>
+    <url-pattern>/ControladorContactoEmergencia</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorConyuge</servlet-name>
+    <url-pattern>/ControladorConyuge</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorDiscapacidad</servlet-name>
+    <url-pattern>/ControladorDiscapacidad</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorEvaluacion</servlet-name>
+    <url-pattern>/ControladorEvaluacion</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorExperienciaLaboral</servlet-name>
+    <url-pattern>/ControladorExperienciaLaboral</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorFormacionAcademica</servlet-name>
+    <url-pattern>/ControladorFormacionAcademica</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorHijo</servlet-name>
+    <url-pattern>/ControladorHijo</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorInclusionLaboral</servlet-name>
+    <url-pattern>/ControladorInclusionLaboral</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorPermiso</servlet-name>
+    <url-pattern>/ControladorPermiso</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorVacacion</servlet-name>
+    <url-pattern>/ControladorVacacion</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorHojaRuta</servlet-name>
+    <url-pattern>/ControladorHojaRuta</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorReporteDocente</servlet-name>
+    <url-pattern>/ControladorReporteDocente</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorReporteBanco</servlet-name>
+    <url-pattern>/ControladorReporteBanco</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorReporteCapacitaciones</servlet-name>
+    <url-pattern>/ControladorReporteCapacitaciones</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorReporteDiscapacidad</servlet-name>
+    <url-pattern>/ControladorReporteDiscapacidad</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorReporteEvaluacion</servlet-name>
+    <url-pattern>/ControladorReporteEvaluacion</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorReporteExperienciaLaboral</servlet-name>
+    <url-pattern>/ControladorReporteExperienciaLaboral</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorReporteFormacionAcademica</servlet-name>
+    <url-pattern>/ControladorReporteFormacionAcademica</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorReporteHijo</servlet-name>
+    <url-pattern>/ControladorReporteHijo</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorReporteConyuge</servlet-name>
+    <url-pattern>/ControladorReporteConyuge</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorReporteVacacion</servlet-name>
+    <url-pattern>/ControladorReporteVacacion</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorReportePermiso</servlet-name>
+    <url-pattern>/ControladorReportePermiso</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorReporteInclusionLaboral</servlet-name>
+    <url-pattern>/ControladorReporteInclusionLaboral</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorReporteHojaRuta</servlet-name>
+    <url-pattern>/ControladorReporteHojaRuta</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorReporteContactoEmergencia</servlet-name>
+    <url-pattern>/ControladorReporteContactoEmergencia</url-pattern>
+</servlet-mapping>
+    
+<servlet-mapping>
+    <servlet-name>ControladorValidar</servlet-name>
+    <url-pattern>/ControladorValidar</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>Controlador</servlet-name>
+    <url-pattern>/Controlador</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorAsistencia</servlet-name>
+    <url-pattern>/ControladorAsistencia</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>ControladorReporteAsistencia</servlet-name>
+    <url-pattern>/ControladorReporteAsistencia</url-pattern>
+</servlet-mapping>
+
+   
+<session-config>
+    <session-timeout>30</session-timeout>
+</session-config>
+<context-param>
+    <param-name>jdbcURL</param-name>
+    <param-value>jdbc:mysql://localhost:3306/bd_talentohumano?autoReconnect=true&amp;useSSL=false&amp;useTimezone=true&amp;serverTimezone=UTC</param-value>
+</context-param>
+<context-param>
+    <param-name>jdbcUSERName</param-name>
+    <param-value>root</param-value>
+</context-param>
+<context-param>
+    <param-name>jdbcPassword</param-name>
+    <param-value>Juanbedoya2003</param-value>
+</context-param>
 </web-app>

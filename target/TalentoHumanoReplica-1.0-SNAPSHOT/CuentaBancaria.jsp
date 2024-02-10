@@ -14,77 +14,72 @@
         <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
         <title>CUENTA BANCARIA</title>
     </head>
-    <body>
-        <div class="d-flex">
-            <div class="card col-sm-16">
-                <div class="card-body">
-                    <form action="Controlador?menu=CuentaBancaria" method="POST">
-                        <div class="form-group">
-                            <label>Institucion Financiera:</label>
-                            <input type="text" name="txtCedula"  class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>Tipo de Cuenta:</label>
-                            <input type="text" name="txtNombres"  class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>Numero de Cuenta:</label>
-                            <input type="text" name="txtApellidos"  class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>Estado:</label>
-                            <div class="col-sm-14">
-                                <select class="form-control" name="txtEstado">
-                                    <option value="1">ACTIVO</option>
-                                    <option value="0">INACTIVO</option>
-                                </select>
-                            </div>
-                        </div>
-                        <input type="submit" name="accion" value="Agregar" class="btn btn-info">
-                        <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
-                    </form>
+         <script type="text/javascript">
+        // Función para obtener un parámetro de la URL
+        function obtenerParametroURL(nombre) {
+            var url = new URL(window.location.href);
+            return url.searchParams.get(nombre);
+        }
 
-                </div>
+        // Función para llenar los campos del formulario con los parámetros de la URL
+        function llenarCamposFormulario() {
+            var idCuentaBancaria = obtenerParametroURL('id');
+            var institucion = obtenerParametroURL('cuenInstitucionFinanciera');
+            var tipoCuenta = obtenerParametroURL('cuenTipoCuenta');
+            var numeroCuenta = obtenerParametroURL('cuenNumeroCuenta');
+            var cedula = obtenerParametroURL('docente_cedulaDocente');
+           
+            
+            document.getElementById('idCuentaBancaria').value = idCuentaBancaria;
+            document.getElementById('cuenInstitucionFinanciera').value = institucion;
+            document.getElementById('cuenTipoCuenta').value = tipoCuenta;
+            document.getElementById('cuenNumeroCuenta').value = numeroCuenta;
+            document.getElementById('docente_cedulaDocente').value = cedula;
+        }
 
+        document.addEventListener('DOMContentLoaded', llenarCamposFormulario);
+    </script>
+    <body class="d-flex align-items-center justify-content-center" style="height: 100vh; background-color: #f8f9fa;">
+        <div class="card col-sm-6">
+            <div class="card-body">
+                <form action="ControladorBanco" method="POST">
+                     <div class="form-group">
+                        <label>Id Cuenta Bancaria:</label>
+                        <input type="number" name="idUpdate" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Cedula del docente:</label>
+                        <input type="number" name="intFkdocente" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Institucion Financiera:</label>
+                        <input type="text" name="txtInstitucion" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Tipo de cuenta:</label>
+                        <div>
+                            <select class="form-control" name="txtTipo" class="form-control form-control-sm">
+                                <option value="Ahorros">Ahorros</option>
+                                <option value="Corriente">Corriente</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Numero de Cuenta:</label>
+                        <input type="number" name="intNumcuenta" class="form-control">
+                    </div>
+                    <div>
+                        <input type="submit" name="cuenta" value="Agregar" class="btn btn-info">
+                        <input type="submit" name="cuenta" value="Actualizar" class="btn btn-success">
+                    </div>
+                    <%
+                        if (request.getAttribute("cajitamensajebase") != null) {
+                            out.println(request.getAttribute("cajitamensajebase"));
+                        }
+                    %>
+                </form>
             </div>
-
-
-            <div class="col-sm-8">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                             <th>#</th>
-                            <th>INSTITUCION</th>
-                            <th>TIPO CUENTA</th>
-                            <th>NUMERO CUENTA</th>
-                            <th>ESTADO</th>
-                            <th>ACCIONES</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="doc" items="${docentes}">
-                        <tr>
-                            <td>${doc.getId()}</td>
-                            <td>{doc.getId}</td>
-                            <td>{doc.getId}</td>
-                            <td>{doc.getId}</td>
-                            <td>{doc.getId}</td>
-                             <td class="text-center">
-                                <div class="btn-group">
-                                    <a class="btn btn-outline-warning btn-sm mr-2" href="Controlador?menu=Producto&accion=Editar&id=${em.getId()}"><i class="icon ion-md-create"></i></a>
-                                    <a class="btn btn-outline-danger btn-sm" href="Controlador?menu=Producto&accion=Delete&id=${em.getId()}"><i class="icon ion-md-trash"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-
-            </div>
-
         </div>
-
-
 
 
     </body>

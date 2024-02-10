@@ -14,78 +14,75 @@
         <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
         <title>Hijos</title>
     </head>
-    <body>
-        <div class="ml-4 mt-4 mr-4">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <form action="Controlador?menu=hijos" method="POST">
-                                <div class="form-group">
-                                    <label>Cedula Hij@:</label>
-                                    <input type="text" value="${cliente.getDni()}" name="txtDni" class="form-control">
+    <body  class="d-flex align-items-center justify-content-center" style="height: 90vh; background-color: #f8f9fa;">
+         <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-sm-8">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="ControladorHijo" method="POST">
+                              <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Id Hijo del docente:</label>
+                                <div class="col-sm-9">
+                                    <input type="number" name="idUpdate" class="form-control">
                                 </div>
-                                <div class="form-group">
-                                    <label>Apellidos:</label>
-                                    <input type="text" value="${cliente.getNom()}" name="txtNombres" class="form-control">
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Cedula del docente:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="intFkdocente" class="form-control">
                                 </div>
-                                <div class="form-group">
-                                    <label>Nombres:</label>
-                                    <input type="email" value="${cliente.getDir()}" name="txtTel" class="form-control" required="">
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Cedula Hij@:</label>
+                                <div class="col-sm-9">
+                                    <input type="number" name="intCedula" class="form-control">
                                 </div>
-                                <div class="form-group">
-                                    <label>Fecha de nacimiento::</label>
-                                    <input type="email" value="${cliente.getDir()}" name="txtTel" class="form-control" required="">
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Apellidos:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="txtApellidos" class="form-control">
                                 </div>
-                                <div class="form-group">
-                                    <label>Escolaridad:</label>
-                                    <input type="email" value="${cliente.getDir()}" name="txtTel" class="form-control" required="">
-                                </div>               
-                                <input type="submit" name="accion" value="Agregar" class="btn btn-primary">
-                                <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
-                            </form>
-                        </div>                         
-                    </div>
-                </div>                     
-                <div class="col-sm-8">
-                    <div class="card">
-                        <div class="card-body">
-                            <table class="table" style="width: 100%" id="example">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th>#</th>                                
-                                        <th>CEDULA</th>
-                                        <th>APELLIDOS</th>
-                                        <th>NOMBRES</th>
-                                        <th>FECHA NACIMIENTO</th>                                   
-                                        <th>ESCOLARIDAD</th>
-                                        <th>ACCIONES</th>
-                                    </tr>
-                                </thead>
-                                <tbody> 
-                                <c:forEach var="em" items="${clientes}" varStatus="n">
-                                    <tr>
-                                        <td class="text-center">${n.index+1}</td>                                    
-                                        <td>${em.getNom()}</td>
-                                        <td>${em.getDir()}</td>
-                                        <td>${em.getDni()}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td class="text-center">
-                                            <div class="btn-group">
-                                                <a class="btn btn-outline-warning btn-sm mr-2" href="Controlador?menu=Producto&accion=Editar&id=${em.getId()}"><i class="icon ion-md-create"></i></a>
-                                                <a class="btn btn-outline-danger btn-sm" href="Controlador?menu=Producto&accion=Delete&id=${em.getId()}"><i class="icon ion-md-trash"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Nombres:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="txtNombres" class="form-control" required="">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Fecha de nacimiento:</label>
+                                <div class="col-sm-9">
+                                    <input type="date" name="dtFechanacimiento" class="form-control" required="">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Escolaridad:</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="txtEscolaridad">
+                                        <option value="Escolar">Escolar</option>
+                                        <option value="Bachillerato">Bachillerato</option>
+                                        <option value="3er Nivel">3er.Nivel</option>
+                                        <option value="4to.Nivel">4to.Nivel</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12 text-center">
+                                    <input type="submit" name="hijo" value="Agregar" class="btn btn-primary">
+                                    <input type="submit" name="hijo" value="Actualizar" class="btn btn-success">
+                                </div>
+                            </div>
+                            <% if (request.getAttribute("cajitamensajebase") != null) {
+                                out.println(request.getAttribute("cajitamensajebase"));
+                            } %>
+                        </form>
                     </div>
                 </div>
-            </div>      
-        </div>      
+            </div>
+        </div>
+    </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

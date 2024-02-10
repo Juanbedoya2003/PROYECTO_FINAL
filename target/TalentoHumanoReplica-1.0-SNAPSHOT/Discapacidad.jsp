@@ -3,9 +3,6 @@
     Created on : 03/01/2024, 18:13:33
     Author     : Juan Bedoya
 --%>
-
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,161 +14,160 @@
         <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
         <title>DISCAPACIDAD ENFERMEDAD</title>
     </head>
-    <body>
+    <script type="text/javascript">
+        // Función para obtener un parámetro de la URL
+        function obtenerParametroURL(nombre) {
+            var url = new URL(window.location.href);
+            return url.searchParams.get(nombre);
+        }
+
+        // Función para llenar los campos del formulario con los parámetros de la URL
+        function llenarCamposFormulario() {
+            var idDiscapacidad = obtenerParametroURL('id');
+            var situacion = obtenerParametroURL('discSituacionDisc');
+            var tipoRelacion = obtenerParametroURL('discTipoRelacionDisc');
+            var numeroConadis = obtenerParametroURL('discNumeroConadis');
+            var certificado = obtenerParametroURL('discCertificadoDiscSiNo');
+            var tipo = obtenerParametroURL('discTipoDisc');
+            var porcentaje = obtenerParametroURL('discPorcentajeDisc');
+            var enfermedad = obtenerParametroURL('discTipoEnfermedad');
+            var cedula = obtenerParametroURL('docente_cedulaDocente');
+
+
+            document.getElementById('idDiscapacidad').value = idDiscapacidad;
+            document.getElementById('discSituacionDisc').value = situacion;
+            document.getElementById('discTipoRelacionDisc').value = tipoRelacion;
+            document.getElementById('discNumeroConadis').value = numeroConadis ;
+            document.getElementById('discCertificadoDiscSiNo').value = certificado;
+            document.getElementById('discTipoDisc').value = tipo;
+            document.getElementById('discPorcentajeDisc').value = porcentaje ;
+            document.getElementById('discTipoEnfermedad').value = enfermedad;
+            document.getElementById('docente_cedulaDocente').value = cedula;
+        }
+
+        document.addEventListener('DOMContentLoaded', llenarCamposFormulario);
+    </script>
+    <body class="d-flex align-items-center justify-content-center" style="height: 60vh; background-color: #f8f9fa;">
         <div class="container mt-4">
             <div class="card mb-3">
                 <div class="card-body">
-                    <form action="Controlador?menu=Discapacidad" method="POST">
+                    <form action="ControladorDiscapacidad" method="POST">
                         <div class="row">
-                            <!-- Columna izquierda -->
-                            <div class="col-md-6">
-                                <!-- Nombre -->
+                            <div class="col-md-4">
                                 <div class="form-group row">
-                                    <label for="txtApellidos" class="col-sm-5 col-form-label">Situacion Discapacidad:</label>
-                                    <div class="col-sm-7">
-                                        <input type="text" value="${producto.getNom()}" name="txtApellidos" class="form-control form-control-sm">
+                                    <label class="col-sm-6 col-form-label">Id Discapacidad:</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" name="idUpdate" class="form-control form-control-sm">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-6 col-form-label">Cedula del docente:</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" name="intFkdocente" class="form-control form-control-sm">
+                                    </div>
+                                </div>
+                                <!-- Fila 2 -->
+                                <div class="form-group row">
+                                    <label class="col-sm-6 col-form-label">Situacion de Discapacidad</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" name="txtSituacion">
+                                            <option value="Discapacidad Física">Discapacidad Fisica</option>
+                                            <option value="Discapacidad Sensorial">Discapacidad Sensorial</option>
+                                            <option value="Discapacidad Intelectual o del Desarrollo">Discapacidad Intelectual o del Desarrollo</option>
+                                            <option value="Discapacidad Psicosocial o de Salud Mental">Discapacidad Psicosocial o de Salud Mental</option>
+                                            <option value="Discapacidad del Habla o del Lenguaje">Discapacidad del Habla o del Lenguaje</option>
+                                            <option value="Discapacidad Crónica">Discapacidad Crónica</option>
+                                            <option value="Discapacidad de Aprendizaje">Discapacidad de Aprendizaje</option>
+                                            <option value="Otros">Otros</option>
+                                        </select>
                                     </div>
                                 </div>
 
-                                <!-- Nombre Institucion -->
                                 <div class="form-group row">
-                                    <label for="txtNombres" class="col-sm-5 col-form-label">Tipo Relacion Discapacidad:</label>
-                                    <div class="col-sm-7">
-                                        <input type="text" value="${producto.getPre()}" name="txtNombres" class="form-control form-control-sm">
+                                    <label  class="col-sm-6 col-form-label">Tipo Relacion</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" name="txtTiporelacion">
+                                            <option value="Persona con Discapacidad">Persona  Discapacidad</option>
+                                            <option value="Familiar de Persona con Discapacidad">Familiar con Discapacidad</option>
+                                            <option value="Persona con Discapacidad">Persona Discapacidad</option>
+                                            <option value="Amigo/a de Persona con Discapacidad">Amigo/a  Discapacidad</option>
+                                            <option value="Otros">Otros</option>
+                                        </select>
+                                    </div>
+                                </div>           `
+                            </div>
+
+                            <div class="col-md-4">
+                                <!-- Fila 1 -->
+                                <div class="form-group row">
+                                    <label class="col-sm-6 col-form-label">Numero Conadis</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" name="nbNumconadis" class="form-control form-control-sm">
                                     </div>
                                 </div>
-
-                                <!-- Departamento Area -->
+                                <!-- Fila 2 -->
                                 <div class="form-group row">
-                                    <label for="txtTel" class="col-sm-5 col-form-label">Numero Conadis:</label>
-                                    <div class="col-sm-7">
-                                        <input type="text" value="${producto.getStock()}" name="txtTel" class="form-control form-control-sm">
+                                    <label class="col-sm-6 col-form-label">Certificado Discapacidad</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" name="txtCertificado">
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select>
                                     </div>
                                 </div>
-
-                                <!-- Denominacion del Puesto -->
+                                <!-- Fila 3 -->
                                 <div class="form-group row">
-                                    <label for="txtEstado" class="col-sm-5 col-form-label">Certificado Discapacidad:</label>
-                                    <div class="col-sm-7">
-                                        <select class="form-control form-control-sm" name="txtEstado">
-                                            <option value="1">SI</option>
-                                            <option value="0">NO</option>
+                                    <label class="col-sm-6 col-form-label">Tipo Discapacidad</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" name="txtTipo">
+                                            <option value="Grave">Grave</option>
+                                            <option value="Normal">Normal</option>
+                                            <option value="Normal">Sencilla</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Columna derecha -->
-                            <div class="col-md-6">
-                                <!-- Fecha Ingreso -->
+                            <!-- Columna 3 -->
+                            <div class="col-md-4">
+                                <!-- Fila 1 -->
                                 <div class="form-group row">
-                                    <label for="txtFechaIngreso" class="col-sm-5 col-form-label">Tipo Discapacidad:</label>
-                                    <div class="col-sm-7">
-                                        <input type="text" value="${producto.getStock()}" name="txtFechaIngreso" class="form-control form-control-sm">
+                                    <label class="col-sm-6 col-form-label">Porcentaje Discapacidad</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" name="txtPorcentaje" class="form-control form-control-sm">
                                     </div>
                                 </div>
-
-                                <!-- Fecha Salida -->
+                                <!-- Fila 2 -->
                                 <div class="form-group row">
-                                    <label for="txtFechaSalida" class="col-sm-5 col-form-label">Porcentaje Discapacidad:</label>
-                                    <div class="col-sm-7">
-                                        <input type="number" value="${producto.getStock()}" name="txtFechaSalida" class="form-control form-control-sm">
+                                    <label class="col-sm-6 col-form-label">Tipo Enfermedad</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" name="txtTipoenfermedad" class="form-control form-control-sm">
                                     </div>
                                 </div>
-
-                                <!-- Modalidad -->
                                 <div class="form-group row">
-                                    <label for="txtModalidad" class="col-sm-5 col-form-label">Tipo Enfermedad:</label>
-                                    <div class="col-sm-7">
-                                        <input type="text" value="${producto.getStock()}" name="txtModalidad" class="form-control form-control-sm">
-                                    </div>
-                                </div>
-
-                                <!-- Estado -->
-                                <div class="form-group row">
-                                    <label for="txtEstado" class="col-sm-5 col-form-label">Estado:</label>
-                                    <div class="col-sm-7">
-                                        <select class="form-control form-control-sm" name="txtEstado">
-                                            <option value="1">ACTIVO</option>
-                                            <option value="0">INACTIVO</option>
-                                        </select>
+                                    <div class="col-sm-12 text-center">
+                                        <input type="submit" name="discapacidad" value="Agregar" class="btn btn-primary">
+                                        <input type="submit" name="discapacidad" value="Actualizar" class="btn btn-success">
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Botones alineados al centro -->
-                        <div class="form-group row">
-                            <div class="col-sm-12 text-center">
-                                <input type="submit" name="accion" value="Agregar" class="btn btn-primary">
-                                <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
-                            </div>
-                        </div>
+                        <%
+                            if (request.getAttribute("cajitamensajebase") != null) {
+                                out.println(request.getAttribute("cajitamensajebase"));
+                            }
+                        %>
                     </form>
                 </div>
             </div>
         </div>
 
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-body">
-                    <table class="table table-hover" style="width: 100%" id="example">
-                        <thead>
-                            <tr class="text-center">
-                                <th>#</th>
-                                <th>SITUACION</th>
-                                <th>TIPO RELACION</th>
-                                <th>NUM CONADIS</th>
-                                <th>CERTIFICADO</th>     
-                                <th>TIPO</th>                                    
-                                <th>PORCENTAJE</th>
-                                <th>TIPO ENFERMEDAD</th>
-                                <th>ESTADO</th>
-                                <th>ACCIONES</th>
-                            </tr>
-                        </thead>
-                        <tbody> 
-                        <c:forEach var="em" items="${productos}">
-                            <tr>
-                                <td class="text-center">${em.getId()}</td>                                      
-                                <td>${em.getNom()}</td>
-                                <td>${em.getPre()}</td>
-                                <td>${em.getStock()}</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                
-                                
 
-                            <c:if test="${em.getEstado()=='1'}">
-                                <td class="text-center">ACTIVO</td>
-                            </c:if>
-                            <c:if test="${em.getEstado()!='1'}">
-                                <td class="text-center">INACTIVO</td>
-                            </c:if>
-                            <td class="text-center">
-                                <div class="btn-group">
-                                <a class="btn btn-outline-warning btn-sm mr-2" href="Controlador?menu=Producto&accion=Editar&id=${em.getId()}"><i class="icon ion-md-create"></i></a>
-                                <a class="btn btn-outline-danger btn-sm" href="Controlador?menu=Producto&accion=Delete&id=${em.getId()}"><i class="icon ion-md-trash"></i></a>
-                           </div>
-                                </td>
-                            </tr>
-                        </c:forEach>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>      
-</div>      
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 
-</body>
+    </body>
 </html>
 

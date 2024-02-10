@@ -3,9 +3,6 @@
     Created on : 03/01/2024, 18:13:33
     Author     : Juan Bedoya
 --%>
-
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,140 +13,124 @@
         <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
         <title>Evaluacion</title>
     </head>
-    <body>
+    <script type="text/javascript">
+        // Función para obtener un parámetro de la URL
+        function obtenerParametroURL(nombre) {
+            var url = new URL(window.location.href);
+            return url.searchParams.get(nombre);
+        }
+
+        // Función para llenar los campos del formulario con los parámetros de la URL
+        function llenarCamposFormulario() {
+            var idEvaluacion = obtenerParametroURL('id');
+            var periodoDesde = obtenerParametroURL('evaPeriodeDesde');
+            var periodoHasta = obtenerParametroURL('evaPeriodoHasta');
+            var institucion = obtenerParametroURL('evaNombreInstitucion');
+            var puntaje = obtenerParametroURL('evaPuntaje');
+            var calificacion = obtenerParametroURL('evaCalificacion');
+            var observacion = obtenerParametroURL('evaObservacion');
+            var cedula = obtenerParametroURL('docente_cedulaDocente');
+
+
+            document.getElementById('idEvaluacion').value = idEvaluacion;
+            document.getElementById('evaPeriodeDesde').value = periodoDesde;
+            document.getElementById('evaPeriodoHasta').value = periodoHasta;
+            document.getElementById('evaNombreInstitucion').value = institucion;
+            document.getElementById('evaPuntaje').value = puntaje;
+            document.getElementById('evaCalificacion').value = calificacion;
+            document.getElementById('evaObservacion').value = observacion;
+            document.getElementById('docente_cedulaDocente').value = cedula;
+        }
+
+        document.addEventListener('DOMContentLoaded', llenarCamposFormulario);
+    </script>
+    <body class="d-flex align-items-center justify-content-center" style="height: 50vh; background-color: #f8f9fa;">
         <div class="container mt-8">
             <div class="card mb-6">
                 <div class="card-body">
-                    <form action="Controlador?menu=Evaluacion" method="POST">
+                    <form action="ControladorEvaluacion" method="POST">
                         <div class="row">
-                            <!-- Columna izquierda -->
-                            <div class="col-md-6">
-                                <!-- Nombre -->
-                                <div class="form-group row">
-                                    <label for="txtApellidos" class="col-sm-5 col-form-label">Periodo Desde:</label>
+                            <!-- Columna 1 -->
+                            <div class="col-md-4">
+                                 <div class="form-group row">
+                                    <label class="col-sm-5 col-form-label">Id Evaluacion Desempeño:</label>
                                     <div class="col-sm-7">
-                                        <input type="date" value="${producto.getNom()}" name="txtApellidos" class="form-control form-control-sm">
+                                        <input type="number" name="idUpdate" class="form-control form-control-sm">
                                     </div>
                                 </div>
-
-                                <!-- Nombre Institucion -->
                                 <div class="form-group row">
-                                    <label for="txtNombres" class="col-sm-5 col-form-label">Periodo Hasta:</label>
+                                    <label class="col-sm-5 col-form-label">Cedula docente:</label>
                                     <div class="col-sm-7">
-                                        <input type="date" value="${producto.getPre()}" name="txtNombres" class="form-control form-control-sm">
+                                        <input type="number" name="intFkdocente" class="form-control form-control-sm">
                                     </div>
                                 </div>
-
-                                <!-- Departamento Area -->
+                                <!-- Fila 2 -->
                                 <div class="form-group row">
-                                    <label for="txtTel" class="col-sm-5 col-form-label">Nombre de la Institucion:</label>
+                                    <label class="col-sm-5 col-form-label">Periodo Desde</label>
                                     <div class="col-sm-7">
-                                        <input type="text" value="${producto.getStock()}" name="txtTel" class="form-control form-control-sm">
+                                        <input type="date" name="dtPeriododesde" class="form-control form-control-sm">
                                     </div>
                                 </div>
-
                             </div>
-
-                            <!-- Columna derecha -->
-                            <div class="col-md-6">
-                                <!-- Fecha Ingreso -->
-                                <div class="form-group row">
-                                    <label for="txtFechaIngreso" class="col-sm-5 col-form-label">Puntaje:</label>
+                            <!-- Columna 2 -->
+                            <div class="col-md-4">
+                                  <div class="form-group row">
+                                    <label class="col-sm-5 col-form-label">Periodo Hasta</label>
                                     <div class="col-sm-7">
-                                        <input type="text" value="${producto.getStock()}" name="txtFechaIngreso" class="form-control form-control-sm">
+                                        <input type="date" name="dtPeriodohasta" class="form-control form-control-sm">
                                     </div>
                                 </div>
-
-                                <!-- Fecha Salida -->
                                 <div class="form-group row">
-                                    <label for="txtFechaSalida" class="col-sm-5 col-form-label">Calificacion:</label>
+                                    <label class="col-sm-5 col-form-label">Institucion</label>
                                     <div class="col-sm-7">
-                                        <input type="number" value="${producto.getStock()}" name="txtFechaSalida" class="form-control form-control-sm">
+                                        <input type="text" name="txtNombreinstitucion" class="form-control form-control-sm">
                                     </div>
                                 </div>
-                                        <div class="form-group row">
-                                    <label for="txtFechaSalida" class="col-sm-5 col-form-label">Observacion:</label>
+                                <!-- Fila 2 -->
+                                <div class="form-group row">
+                                    <label class="col-sm-5 col-form-label">Puntaje</label>
                                     <div class="col-sm-7">
-                                        <input type="number" value="${producto.getStock()}" name="txtFechaSalida" class="form-control form-control-sm">
+                                        <input type="number" name="txtPuntaje" class="form-control form-control-sm">
                                     </div>
                                 </div>
-
-                                <!-- Estado -->
+                            </div>
+                            <!-- Columna 3 -->
+                            <div class="col-md-4">
                                 <div class="form-group row">
-                                    <label for="txtEstado" class="col-sm-5 col-form-label">Estado:</label>
+                                    <label class="col-sm-5 col-form-label">Calificacion</label>
                                     <div class="col-sm-7">
-                                        <select class="form-control form-control-sm" name="txtEstado">
-                                            <option value="1">ACTIVO</option>
-                                            <option value="0">INACTIVO</option>
+                                        <select class="form-control" name="txtCalificacion">
+                                            <option value="Excelente">Excelente</option>
+                                            <option value="Buena">Buena</option>
+                                            <option value="Regular">Regular</option>
+                                            <option value="Deficiente">Deficiente</option>
                                         </select>
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-5 col-form-label">Observacion</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" name="txtObservacion" class="form-control form-control-sm">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 text-center">
+                                        <input type="submit" name="evaluacion" value="Agregar" class="btn btn-primary">
+                                        <input type="submit" name="evaluacion" value="Actualizar" class="btn btn-success">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <!-- Botones alineados al centro -->
-                        <div class="form-group row ">
-                            <div class="col-sm-12 text-center">
-                                <input type="submit" name="accion" value="Agregar" class="btn btn-primary">
-                                <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
-                            </div>
-                        </div>
+                        <%
+                            if (request.getAttribute("cajitamensajebase") != null) {
+                                out.println(request.getAttribute("cajitamensajebase"));
+                            }
+                        %>
                     </form>
                 </div>
             </div>
         </div>
 
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-body">
-                    <table class="table table-hover" style="width: 100%" id="example">
-                        <thead>
-                            <tr class="text-center">
-                                <th>#</th>
-                                <th>MIGRANTE</th>
-                                <th>NACIONALIDAD</th>
-                                <th>EMBARAZO</th>
-                                <th>MESES EMBARAZO</th>     
-                                <th>TIPO</th>                                    
-                                <th>PORCENTAJE</th>
-                                <th>TIPO ENFERMEDAD</th>
-                                <th>ESTADO</th>
-                                <th>ACCIONES</th>
-                            </tr>
-                        </thead>
-                        <tbody> 
-                        <c:forEach var="em" items="${productos}">
-                            <tr>
-                                <td class="text-center">${em.getId()}</td>                                      
-                                <td>${em.getNom()}</td>
-                                <td>${em.getPre()}</td>
-                                <td>${em.getStock()}</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            <c:if test="${em.getEstado()=='1'}">
-                                <td class="text-center">ACTIVO</td>
-                            </c:if>
-                            <c:if test="${em.getEstado()!='1'}">
-                                <td class="text-center">INACTIVO</td>
-                            </c:if>
-                            <td class="text-center">
-                                <div class="btn-group">
-                                    <a class="btn btn-outline-warning btn-sm mr-2" href="Controlador?menu=Producto&accion=Editar&id=${em.getId()}"><i class="icon ion-md-create"></i></a>
-                                    <a class="btn btn-outline-danger btn-sm" href="Controlador?menu=Producto&accion=Delete&id=${em.getId()}"><i class="icon ion-md-trash"></i></a>
-                                </div>
-                            </td>
-                            </tr>
-                        </c:forEach>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>      
-</div>      
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

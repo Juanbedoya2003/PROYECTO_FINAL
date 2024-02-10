@@ -5,10 +5,7 @@
  */
 package Modelo;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
+import java.sql.*;
 /**
  *
  * @author Juan Bedoya
@@ -40,20 +37,20 @@ public class ConexionBd {
                 throw new SQLException(obje);
 
             }
-            jdbcConnection = (Connection) DriverManager.getConnection(jdbcURL, jdbcURL, jdbcPassword); //abro conexion a la bd
-            
+            jdbcConnection = (Connection) DriverManager.getConnection(jdbcURL, jdbcUSERName, jdbcPassword); //abro conexion a la bd
+
         }
     }
+
     //metodo para desconectar la bd
-    public void discconect() throws SQLException{
-        if(jdbcConnection != null && ! jdbcConnection.isClosed()){
-           jdbcConnection.close(); //Cierro conexion bd
+    public void discconect() throws SQLException {
+        if (jdbcConnection != null && !jdbcConnection.isClosed()) {
+            jdbcConnection.close(); //Cierro conexion bd
         }
     }
+
     //metodo para trabajar con la conexion BD
-    public Connection getJdbcConnection(){
+    public Connection getJdbcConnection() {
         return jdbcConnection;
     }
 }
-
-

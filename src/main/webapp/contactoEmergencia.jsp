@@ -3,13 +3,6 @@
     Created on : 03/01/2024, 18:13:33
     Author     : Juan Bedoya
 --%>
-
-<%-- 
-    Document   : hijos
-    Created on : 03/01/2024, 18:04:18
-    Author     : Juan Bedoya
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,86 +13,76 @@
         <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
         <title>CONTACTO EMERGENCIA</title>
     </head>
-    <body>
+    <body class="d-flex align-items-center justify-content-center" style="height: 80vh; background-color: #f8f9fa;">
         <div class="container mt-4">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <form action="Controlador?menu=contactoEmergencia" method="POST">
-                                <div class="form-group">
-                                    <label>Apellidos</label>
-                                    <input type="text" value="${producto.getNom()}" name="txtApellidos" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Nombres</label>
-                                    <input type="text" value="${producto.getPre()}" name="txtNombres" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Telefono Domicilio</label>
-                                    <input type="text" value="${producto.getStock()}" name="txtTel" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Telefono Celular</label>
-                                    <input type="text" value="${producto.getStock()}" name="txtCel" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Estado</label>
-                                    <select class="form-control" name="txtEstado">
-                                        <option value="1">ACTIVO</option>
-                                        <option value="0">INACTIVO</option>
-                                    </select>
-                                </div>                        
-                                <input type="submit" name="accion" value="Agregar" class="btn btn-primary">
-                                <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
-                            </form>
-                        </div>                         
-                    </div>
-                </div>                     
+            <div class="row justify-content-center">
                 <div class="col-sm-8">
                     <div class="card">
                         <div class="card-body">
-                            <table class="table table-hover" style="width: 100%" id="example">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th>#</th>
-                                        <th>Apellidos</th>
-                                        <th>Nombres</th>
-                                        <th>Telefono Domicilio</th>
-                                        <th>Telefono Celular</th>     
-                                        <th>ESTADO</th>                                    
-                                        <th>ACCION</th>
-                                    </tr>
-                                </thead>
-                                <tbody> 
-                                <c:forEach var="em" items="${productos}">
-                                    <tr>
-                                        <td class="text-center">${em.getId()}</td>                                      
-                                        <td>${em.getNom()}</td>
-                                        <td>${em.getPre()}</td>
-                                        <td>${em.getStock()}</td>
-                                    <c:if test="${em.getEstado()=='1'}">
-                                        <td class="text-center">ACTIVO</td>
-                                    </c:if>
-                                    <c:if test="${em.getEstado()!='1'}">
-                                        <td class="text-center">INACTIVO</td>
-                                    </c:if>
-                                    <td class="text-center">
-                                        <div class="btn-group">
-                                            <a class="btn btn-outline-warning btn-sm mr-2" href="Controlador?menu=Producto&accion=Editar&id=${em.getId()}"><i class="icon ion-md-create"></i></a>
-                                            <a class="btn btn-outline-danger btn-sm" href="Controlador?menu=Producto&accion=Delete&id=${em.getId()}"><i class="icon ion-md-trash"></i></a>
-                                        </div>
-                                    </td>
-                                    </tr>
-                                </c:forEach>
+                            <form action="ControladorContactoEmergencia" method="POST">
 
-                                </tbody>
-                            </table>
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Id Contacto Emergencia:</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" name="idUpdate" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Cedula del docente:</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" name="intFkdocente" class="form-control">
+                                    </div>
+                                </div>
+
+                                <!-- Fila 2 -->
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Apellidos:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="txtApellidos" class="form-control">
+                                    </div>
+                                </div>
+
+                                <!-- Fila 3 -->
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Nombres:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="txtNombres" class="form-control">
+                                    </div>
+                                </div>
+
+                                <!-- Fila 4 -->
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Telefono Domicilio:</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" name="txtTeldomicilio" class="form-control">
+                                    </div>
+                                </div>
+
+                                <!-- Fila 5 -->
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Telefono Celular:</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" name="txtTelcelular" class="form-control">
+                                    </div>
+                                </div>
+
+                                <!-- Fila 6 -->
+                                <div class="form-group row">
+                                    <div class="col-sm-12 text-center">
+                                        <input type="submit" name="contacto" value="Agregar" class="btn btn-primary">
+                                        <input type="submit" name="contacto" value="Actualizar" class="btn btn-success">
+                                    </div>
+                                </div>
+
+                                <% if (request.getAttribute("cajitamensajebase") != null) {
+                                    out.println(request.getAttribute("cajitamensajebase"));
+                                } %>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </div>      
-        </div>      
+            </div>
+        </div>               
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
